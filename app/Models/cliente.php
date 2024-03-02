@@ -10,13 +10,14 @@ class cliente extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
-        'apellidos',
-        'sexo',
-        'fecha_nacimiento',
-        'num_documento',
-        'direccion',
-        'telefono',
-        'email',
+        'nombre', 
+        'apellido', 
+        'sexo', 
+        'fecha_nacimiento', 
+        'tipo_documento', 
+        'num_documento', 
+        'direccion', 
+        'telefono', 
+        'email'
     ];
 }

@@ -10,13 +10,11 @@ class ventas extends Model
     use HasFactory;
 
     protected $fillable = [
-        'idtrabajador',
-        'idcliente',
         'fecha',
-        'tipo_comprobante',
-        'serie',
-        'correlativo',
-        'igv',
-        'estado',
+         'tipo_comprobante', 
+         'serie', 
+         'correlativo', 
+         'igv', 
+         'estado'
     ];
 }

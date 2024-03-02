@@ -7,36 +7,67 @@ use Illuminate\Http\Request;
 
 class DetalleVentaController extends Controller
 {
+   /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $detallesVenta = DetalleVenta::all();
-        return response()->json($detallesVenta, 200);
+        $detalles_ventas = DetalleVenta::all();
+        return response()->json([ 'Detalles_ventas' => $detalles_ventas]);     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $detalleVenta = DetalleVenta::create($request->all());
-        return response()->json($detalleVenta, 201);
+        $detalles_ventas = DetalleVenta::create($request->all());
+        return response()->json(['Detalle_ventas: ' => $detalles_ventas]);
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show( $id)
     {
-        $detalleVenta = DetalleVenta::findOrFail($id);
-        return response()->json($detalleVenta, 200);
+        $detalles_ventas = DetalleVenta::findOrFail($id);
+        return response()->json(['Detalles_Ventas:' => $detalles_ventas]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(DetalleVenta $detalles_Ventas)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
-        $detalleVenta = DetalleVenta::findOrFail($id);
-        $detalleVenta->update($request->all());
-        return response()->json($detalleVenta, 200);
+        $detalles_ventas = DetalleVenta::findOrFail($id);
+        $detalles_ventas->update($request->all());
+        return response()->json(['detalles_ventas: ' => $detalles_ventas]);
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy( $id)
     {
-        $detalleVenta = DetalleVenta::findOrFail($id);
-        $detalleVenta->delete();
-        return response()->json(null, 204);
+        $detalles_ventas = DetalleVenta::findOrFail($id);
+        $detalles_ventas->delete();
+        return response()->json(['message' => 'detalles_ventas eliminado correctamente']);
     }
-
 }
+
+

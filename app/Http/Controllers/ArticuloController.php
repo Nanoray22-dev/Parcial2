@@ -15,8 +15,17 @@ class ArticuloController extends Controller
 
     public function store(Request $request)
     {
-        $articulo = Articulo::create($request->all());
-        return response()->json($articulo, 201);
+
+
+        $request->validate([
+            'codigo' => 'required', 
+            'nombre' => 'required', 
+            'descripcion' => 'required', 
+            'imagen' => 'required'
+        ]);
+
+        $articulos = Articulo::create($request->all());
+        return response()->json(['articulos' => $articulos]);
     }
 
     public function show($id)
@@ -24,12 +33,19 @@ class ArticuloController extends Controller
         $articulo = Articulo::findOrFail($id);
         return response()->json($articulo, 200);
     }
-
-    public function update(Request $request, $id)
+    public function update(Request $request,  $id)
     {
-        $articulo = Articulo::findOrFail($id);
-        $articulo->update($request->all());
-        return response()->json($articulo, 200);
+        $request->validate([
+            'codigo' => 'required', 
+            'nombre' => 'required', 
+            'descripcion' => 'required', 
+            'imagen' => 'required' . $id,
+        ]);
+
+
+        $articulos = Articulo::findOrFail($id);
+        $articulos->update($request->all());
+        return response()->json($articulos);
     }
 
     public function destroy($id)

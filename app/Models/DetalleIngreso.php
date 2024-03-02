@@ -10,14 +10,12 @@ class DetalleIngreso extends Model
     use HasFactory;
 
     protected $fillable = [
-        'idingreso',
-        'idarticulo',
-        'precio_compra',
-        'precio_venta',
-        'stock_inicial',
-        'stock_actual',
-        'fecha_produccion',
-        'fecha_vencimiento',
+        'precio_compra', 
+        'precio_venta', 
+        'stock_inicial', 
+        'stock_actual', 
+        'fecha_produccion', 
+        'fecha_vencimiento'
     ];
 
 }

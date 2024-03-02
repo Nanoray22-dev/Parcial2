@@ -9,33 +9,69 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = cliente::all();
-        return response()->json($clientes, 200);
+        $clientes = Cliente::all();
+        return response()->json($clientes);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $cliente = Cliente::create($request->all());
-        return response()->json($cliente, 201);
+        $request->validate(['nombre' => 'required', 'apellido' => 'required', 'sexo' => 'required', 'fecha_nacimiento' => 'required','tipo_documento' => 'required','num_documento' => 'required','direccion' => 'required','telefono' => 'required','email' => 'required']);
+
+        $clientes = Cliente::create($request->all());
+        return response()->json(['clientes' => $clientes]);
+
+
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show( $id)
     {
-        $cliente = Cliente::findOrFail($id);
-        return response()->json($cliente, 200);
+        $clientes = Cliente::findOrFail($id);
+        return response()->json($clientes);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Cliente $clientes)
     {
-        $cliente = Cliente::findOrFail($id);
-        $cliente->update($request->all());
-        return response()->json($cliente, 200);
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request,  $id)
     {
-        $cliente = Cliente::findOrFail($id);
-        $cliente->delete();
-        return response()->json(null, 204);
+      
+        $request->validate(['nombre' => 'required', 'apellido' => 'required', 'sexo' => 'required', 'fecha_nacimiento' => 'required','tipo_documento' => 'required','num_documento' => 'required','direccion' => 'required','telefono' => 'required','email' => 'required' . $id]);
+        
+        $clientes = Cliente::findOrFail($id);
+        $clientes->update($request->all());
+        return response()->json($clientes);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy( $id)
+    {
+        $clientes = Cliente::findOrFail($id);
+        $clientes->delete();
+        return 'El registro se borro correctamente';
+    
     }
 }

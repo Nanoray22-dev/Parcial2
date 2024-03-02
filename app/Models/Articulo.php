@@ -9,12 +9,11 @@ class Articulo extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'codigo',
-        'nombre',
-        'descripcion',
-        'imagen',
-        'idcategoria',
-        'idpresentacion',
+        'codigo', 
+        'nombre', 
+        'descripcion', 
+        'imagen'
     ];
 }

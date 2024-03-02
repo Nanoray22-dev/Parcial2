@@ -12,8 +12,8 @@ class VentaController extends Controller
      */
     public function index()
     {
-        $ventas = ventas::all();
-        return response()->json($ventas, 200);
+        $ventas = Ventas::all();
+        return response()->json([ 'Ventas' => $ventas], 201); 
     }
 
     /**
@@ -29,44 +29,43 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        $venta = ventas::create($request->all());
-        return response()->json($venta, 201);
-    }
+        $ventas = Ventas::create($request->all());
+        return response()->json(['Ventas: ' => $ventas]);    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
-        $venta = ventas::findOrFail($id);
-        return response()->json($venta, 200);
+        $ventas = Ventas::findOrFail($id);
+        return response()->json(['Venta:' => $ventas]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ventas $ventas)
     {
-        
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $venta = Ventas::findOrFail($id);
-        $venta->update($request->all());
-        return response()->json($venta, 200);
+        $ventas = Ventas::findOrFail($id);
+        $ventas->update($request->all());
+        return response()->json(['Ventas: ' => $ventas]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
-        $venta = Ventas::findOrFail($id);
-        $venta->delete();
-        return response()->json(null, 204);
+        $ventas = Ventas::findOrFail($id);
+        $ventas->delete();
+        return response()->json(['message' => 'Venta eliminada correctamente']);
     }
 }

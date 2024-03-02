@@ -4,27 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVentaTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('venta', function (Blueprint $table) {
+        Schema::create('ventas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('trabajador_id');
-            $table->unsignedBigInteger('cliente_id');
+            $table->foreignId('cliente_id')->constrained('clientes');
+            $table->foreignId('trabajadores_id')->constrained('trabajadores');
             $table->date('fecha');
             $table->string('tipo_comprobante');
             $table->string('serie');
             $table->string('correlativo');
-            $table->decimal('igv', 10, 2);
+            $table->string('igv');
             $table->string('estado');
             $table->timestamps();
-
-            // $table->foreign('trabajador_id')->references('id')->on('trabajador')->onDelete('cascade');;
-            // $table->foreign('cliente_id')->references('id')->on('cliente')->onDelete('cascade');;
         });
     }
 
@@ -33,6 +30,6 @@ class CreateVentaTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('venta');
+        Schema::dropIfExists('ventas');
     }
-}
+};

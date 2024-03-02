@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detalle_ingreso', function (Blueprint $table) {
+        Schema::create('detalle_ingresos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ingreso_id');
-            $table->unsignedBigInteger('idarticulo');
-            $table->decimal('precio_compra', 10, 2);
-            $table->decimal('precio_venta', 10, 2);
-            $table->integer('stock_inicial');
-            $table->integer('stock_actual');
+            $table->foreignId('articulos_id')->constrained('articulos');
+            $table->char('precio_compra');
+            $table->char('precio_venta');
+            $table->char('stock_inicial');
+            $table->char('stock_actual');
             $table->date('fecha_produccion');
             $table->date('fecha_vencimiento');
             $table->timestamps();
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detalle_ingreso');
+        Schema::dropIfExists('detalle_ingresos');
     }
 };
